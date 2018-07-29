@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GriffinPlus.Lib.Configuration", "GriffinPlus.Lib.Configuration\GriffinPlus.Lib.Configuration.csproj", "{4C0B72B8-29F2-4D83-80C2-970835AB15D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GriffinPlus.Lib.Configuration.Tests", "GriffinPlus.Lib.Configuration.Tests\GriffinPlus.Lib.Configuration.Tests.csproj", "{05F63D65-E5F3-471D-A4EE-32DCCDADB1C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ACBBAE94-1B5A-4B16-B593-2A938E577EB4}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GriffinPlus.Lib.Configuration.WindowsRegistry", "GriffinPlus.Lib.Configuration.WindowsRegistry\GriffinPlus.Lib.Configuration.WindowsRegistry.csproj", "{AC6F08CB-727A-40F5-A5B0-F58F121CAB60}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GriffinPlus.Lib.Configuration.Xml", "GriffinPlus.Lib.Configuration.Xml\GriffinPlus.Lib.Configuration.Xml.csproj", "{A5798B03-AB43-411F-81C2-3492A0D8F0E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C0B72B8-29F2-4D83-80C2-970835AB15D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C0B72B8-29F2-4D83-80C2-970835AB15D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C0B72B8-29F2-4D83-80C2-970835AB15D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C0B72B8-29F2-4D83-80C2-970835AB15D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05F63D65-E5F3-471D-A4EE-32DCCDADB1C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05F63D65-E5F3-471D-A4EE-32DCCDADB1C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05F63D65-E5F3-471D-A4EE-32DCCDADB1C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05F63D65-E5F3-471D-A4EE-32DCCDADB1C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC6F08CB-727A-40F5-A5B0-F58F121CAB60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC6F08CB-727A-40F5-A5B0-F58F121CAB60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC6F08CB-727A-40F5-A5B0-F58F121CAB60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC6F08CB-727A-40F5-A5B0-F58F121CAB60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5798B03-AB43-411F-81C2-3492A0D8F0E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5798B03-AB43-411F-81C2-3492A0D8F0E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5798B03-AB43-411F-81C2-3492A0D8F0E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5798B03-AB43-411F-81C2-3492A0D8F0E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C48175DE-06DD-4363-BDCE-8843C7582215}
+	EndGlobalSection
+EndGlobal
