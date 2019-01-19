@@ -42,7 +42,7 @@ namespace GriffinPlus.Lib.Configuration
 		public event EventHandler<CommentChangedEventArgs> CommentChanged;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="CascadedConfiguration.Item"/> class.
+		/// Initializes a new instance of the <see cref="CascadedConfigurationItem{T}"/> class.
 		/// </summary>
 		/// <param name="name">Name of the configuration item.</param>
 		/// <param name="path">Path of the configuration item in the configuration hierarchy.</param>

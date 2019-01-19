@@ -21,7 +21,20 @@ namespace GriffinPlus.Lib.Configuration
 	/// <typeparam name="T">The type of the value the converter works with.</typeparam>
 	public class Converter<T> : IConverter
 	{
+		/// <summary>
+		/// Delegate for functions converting an object to a string.
+		/// </summary>
+		/// <param name="obj">Object to convert to a string.</param>
+		/// <param name="provider">Format provider to use.</param>
+		/// <returns>The object as a string.</returns>
 		public delegate string ObjectToStringConversionDelegate(T obj, IFormatProvider provider = null);
+
+		/// <summary>
+		/// Delegate for functions converting a string to the corresponding object.
+		/// </summary>
+		/// <param name="s">String to parse.</param>
+		/// <param name="provider">Format provider to use.</param>
+		/// <returns>The created object built from the specified string.</returns>
 		public delegate T StringToObjectConversionDelegate(string s, IFormatProvider provider = null);
 
 		/// <summary>

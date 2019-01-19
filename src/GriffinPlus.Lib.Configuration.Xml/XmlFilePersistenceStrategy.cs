@@ -34,7 +34,7 @@ namespace GriffinPlus.Lib.Configuration
 		/// <param name="path">Path of the configuration file.</param>
 		public XmlFilePersistenceStrategy(string path)
 		{
-			mConfigurationFilePath = path;
+			mConfigurationFilePath = Path.GetFullPath(Environment.ExpandEnvironmentVariables(path));
 		}
 
 

@@ -24,6 +24,10 @@ namespace GriffinPlus.Lib.Configuration
 	public abstract class CascadedConfigurationPersistenceStrategy : ICascadedConfigurationPersistenceStrategy
 	{
 		private readonly Dictionary<Type,IConverter> mValueConverters = new Dictionary<Type,IConverter>();
+		
+		/// <summary>
+		/// Synchronization object used for synchronizing access to the persistence strategy.
+		/// </summary>
 		protected readonly object mSync = new object();
 
 		/// <summary>

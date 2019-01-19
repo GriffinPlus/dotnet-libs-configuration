@@ -23,7 +23,6 @@ namespace GriffinPlus.Lib.Configuration
 		/// <summary>
 		/// Event arguments carrying some information about a changed configuration item in a cascaded configuration.
 		/// </summary>
-		/// <typeparam name="T">Type of the value in the configuration item that has changed.</typeparam>
 		public class ValueChangedEventArgs : EventArgs
 		{
 			private readonly CascadedConfigurationItem<T> mIssuer;

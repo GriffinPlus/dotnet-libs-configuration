@@ -17,8 +17,9 @@ using System.Reflection;
 using System.Net;
 using System.Collections.Generic;
 using System.Linq;
+using GriffinPlus.Lib.Configuration;
 
-namespace GriffinPlus.Lib.Configuration.Tests
+namespace UnitTests
 {
 	public class CascadedConfigurationTests_NoPersistence
 	{

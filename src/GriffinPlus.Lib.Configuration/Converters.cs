@@ -38,7 +38,7 @@ namespace GriffinPlus.Lib.Configuration
 		public readonly static Converter<Byte> Byte = new Converter<Byte>((s, provider) => System.Byte.Parse(s, provider));
 
 		/// <summary>
-		/// A converter for translating a <see cref="System.Byte[]"/> to a string and vice versa.
+		/// A converter for translating an array of <see cref="System.Byte"/> to a string and vice versa.
 		/// </summary>
 		public readonly static Converter<Byte[]> ByteArray = new Converter<Byte[]>(
 			(s, provider) => Convert.FromBase64String(s),

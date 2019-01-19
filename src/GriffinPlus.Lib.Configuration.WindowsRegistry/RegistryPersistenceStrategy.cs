@@ -16,6 +16,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Security;
 using System.Text.RegularExpressions;
 
 namespace GriffinPlus.Lib.Configuration
@@ -311,6 +312,7 @@ namespace GriffinPlus.Lib.Configuration
 		/// <summary>
 		/// Saves the specified configuration in the registry.
 		/// </summary>
+		/// <param name="configuration">Configuration to save.</param>
 		/// <param name="flags">Flags controlling the save behavior.</param>
 		/// <exception cref="SecurityException">The user does not have the permissions required to read from the registry key.</exception>
 		/// <exception cref="ConfigurationException">Saving the configuration failed due to a serialization error.</exception>

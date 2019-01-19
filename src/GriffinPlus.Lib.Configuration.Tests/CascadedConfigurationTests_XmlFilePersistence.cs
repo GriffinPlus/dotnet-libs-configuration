@@ -14,8 +14,9 @@
 using System;
 using System.Net;
 using System.Collections.Generic;
+using GriffinPlus.Lib.Configuration;
 
-namespace GriffinPlus.Lib.Configuration.Tests
+namespace UnitTests
 {
 	public class CascadedConfigurationTests_XmlFilePersistence : CascadedConfigurationTests_NoPersistence
 	{

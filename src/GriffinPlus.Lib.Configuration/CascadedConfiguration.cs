@@ -1078,9 +1078,13 @@ namespace GriffinPlus.Lib.Configuration
 		/// Relative path of the configuration to get/create (path delimiter are '/' and '\',
 		/// escape these characters, if a path segment contains one of them, otherwise the segment will be split up).
 		/// </param>
+		/// <param name="create">
+		/// true to create the child configuration, if it does not exist;
+		/// false to return <c>null</c>, if the configuration does not exist.
+		/// </param>
 		/// <returns>
 		/// The requested child configuration;
-		/// null, if the child configuration at the specified path does not exist and <see cref="create"/> is <c>false</c>.
+		/// null, if the child configuration at the specified path does not exist and <paramref name="create"/> is <c>false</c>.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">The specified path is null.</exception>
 		/// <exception cref="ArgumentException">The specified path is empty.</exception>

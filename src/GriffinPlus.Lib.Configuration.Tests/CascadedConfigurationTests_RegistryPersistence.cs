@@ -11,10 +11,11 @@
 // the specific language governing permissions and limitations under the License.
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+using GriffinPlus.Lib.Configuration;
 using System;
 using Xunit;
 
-namespace GriffinPlus.Lib.Configuration.Tests
+namespace UnitTests
 {
 	public class CascadedConfigurationTests_RegistryPersistence : CascadedConfigurationTests_NoPersistence
 	{
