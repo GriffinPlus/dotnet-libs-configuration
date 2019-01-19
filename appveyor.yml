@@ -28,7 +28,7 @@ build_script:
 #---------------------------------#
 
 test_script:
-  - vstest.console "_build\Configuration.AnyCPU.Release\GriffinPlus.Lib.Configuration.Tests.dll"
+  - vstest.console "_build\Configuration.AnyCPU.Release\net461\GriffinPlus.Lib.Configuration.Tests.dll"
 
 #---------------------------------#
 #      packaging artifacts        #
