@@ -26,13 +26,9 @@ Therefore these libraries should work on the following platforms (or higher):
 - Xamarin Android 8.0
 - Universal Windows Platform (UWP) 10.0.16299
 
-The *Windows Registry* persistence strategy is platform dependent and needs the .NET framework 4.6.1 or higher to work.
+The *Windows Registry* persistence strategy is platform dependent and needs .NET framework 4.6.1 or higher to work.
 
 ## Using
-
-TBD: easy example
-
-### More Complex Example
 
 To illustrate the use of the configuration subsystem in a more complex scenario, let's assume that we want to have machine specific settings in the registry and user specific settings in a XML file. Furthermore default user specific settings should be defined at machine level. Default user specific settings apply to all users unless a setting is overridden at user level.
 
