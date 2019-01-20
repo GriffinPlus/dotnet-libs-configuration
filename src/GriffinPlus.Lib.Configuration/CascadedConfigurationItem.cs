@@ -1,7 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // This file is part of the Griffin+ common library suite (https://griffin.plus)
 //
-// Copyright 2018 Sascha Falk <sascha@falk-online.eu>
+// Copyright 2018-2019 Sascha Falk <sascha@falk-online.eu>
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -12,9 +12,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace GriffinPlus.Lib.Configuration
 {
@@ -23,7 +20,6 @@ namespace GriffinPlus.Lib.Configuration
 	/// </summary>
 	public partial class CascadedConfigurationItem<T> : ICascadedConfigurationItemInternal
 	{
-		private CascadedConfiguration mConfiguration;
 		private readonly string mName;
 		private readonly string mPath;
 		private T mValue;
@@ -58,11 +54,7 @@ namespace GriffinPlus.Lib.Configuration
 		/// <summary>
 		/// Gets the configuration the current item is in.
 		/// </summary>
-		public CascadedConfiguration Configuration
-		{
-			get { return mConfiguration; } // immutable part (does not change after the item is added to the configuration) => no synchronization necessary
-			internal set { mConfiguration = value; }
-		}
+		public CascadedConfiguration Configuration { get; internal set; }
 
 		/// <summary>
 		/// Gets the name of the configuration item.
@@ -71,7 +63,7 @@ namespace GriffinPlus.Lib.Configuration
 		{
 			get
 			{
-				lock (mConfiguration.Sync)
+				lock (Configuration.Sync)
 				{
 					return mName;
 				}
@@ -85,7 +77,7 @@ namespace GriffinPlus.Lib.Configuration
 		{
 			get
 			{
-				lock (mConfiguration.Sync)
+				lock (Configuration.Sync)
 				{
 					return mPath;
 				}
@@ -110,7 +102,7 @@ namespace GriffinPlus.Lib.Configuration
 		{
 			get
 			{
-				lock (mConfiguration.Sync)
+				lock (Configuration.Sync)
 				{
 					return mHasValue;
 				}
@@ -123,14 +115,14 @@ namespace GriffinPlus.Lib.Configuration
 		/// <exception cref="ConfigurationException">The configuration item does not have a value.</exception>
 		/// <remarks>
 		/// This property gets the value of the current configuration item, if the current configuration item provides
-		/// a value for it. If it doesn't the inherited configuration in the configuration cascade is queried.
+		/// a value for it. If it doesn't inherited configurations in the configuration cascade are queried.
 		/// Setting the property effects the current configuration item only.
 		/// </remarks>
 		public T Value
 		{
 			get
 			{
-				lock (mConfiguration.Sync)
+				lock (Configuration.Sync)
 				{
 					if (mHasValue)
 					{
@@ -138,20 +130,22 @@ namespace GriffinPlus.Lib.Configuration
 					}
 					else
 					{
-						return mConfiguration.GetValue<T>(mName);
+						return Configuration.GetValue<T>(mName);
 					}
 				}
 			}
 
 			set
 			{
-				lock (mConfiguration.Sync)
+				lock (Configuration.Sync)
 				{
-					if (mConfiguration.PersistenceStrategy != null)
+					if (Configuration.PersistenceStrategy != null)
 					{
-						if (!mConfiguration.PersistenceStrategy.IsAssignable(Type, value))
+						if (!Configuration.PersistenceStrategy.IsAssignable(Type, value))
 						{
-							throw new ConfigurationException("The specified value is not supported for a configuration item of type '{0}'.", typeof(T).FullName);
+							throw new ConfigurationException(
+								"The specified value is not supported for a configuration item of type '{0}'.",
+								typeof(T).FullName);
 						}
 					}
 
@@ -160,7 +154,7 @@ namespace GriffinPlus.Lib.Configuration
 						mValue = value;
 						mHasValue = true;
 						OnValueChanged(this, value);
-						mConfiguration.NotifyItemValueChanged<T>(this, mValue);
+						Configuration.NotifyItemValueChanged<T>(this, mValue);
 					}
 				}
 			}
@@ -173,7 +167,7 @@ namespace GriffinPlus.Lib.Configuration
 		{
 			get
 			{
-				lock (mConfiguration.Sync)
+				lock (Configuration.Sync)
 				{
 					return mHasComment;
 				}
@@ -187,7 +181,7 @@ namespace GriffinPlus.Lib.Configuration
 		{
 			get
 			{
-				return mConfiguration.PersistenceStrategy == null || mConfiguration.PersistenceStrategy.SupportsComments;
+				return Configuration.PersistenceStrategy == null || Configuration.PersistenceStrategy.SupportsComments;
 			}
 		}
 
@@ -196,14 +190,14 @@ namespace GriffinPlus.Lib.Configuration
 		/// </summary>
 		/// <remarks>
 		/// This property gets the comment of the current configuration item, if the current configuration item provides a comment.
-		/// If it doesn't the inherited configuration in the configuration cascade is queried. Setting the property effects the current
+		/// If it doesn't inherited configurations in the configuration cascade are queried. Setting the property effects the current
 		/// configuration item only.
 		/// </remarks>
 		public string Comment
 		{
 			get
 			{
-				lock (mConfiguration.Sync)
+				lock (Configuration.Sync)
 				{
 					if (mHasComment)
 					{
@@ -211,16 +205,16 @@ namespace GriffinPlus.Lib.Configuration
 					}
 					else
 					{
-						return mConfiguration.GetComment(mName);
+						return Configuration.GetComment(mName);
 					}
 				}
 			}
 
 			set
 			{
-				lock (mConfiguration.Sync)
+				lock (Configuration.Sync)
 				{
-					if (mConfiguration.PersistenceStrategy != null && !mConfiguration.PersistenceStrategy.SupportsComments)
+					if (Configuration.PersistenceStrategy != null && !Configuration.PersistenceStrategy.SupportsComments)
 					{
 						throw new NotSupportedException("The persistence strategy does not support comments.");
 					}
@@ -230,7 +224,7 @@ namespace GriffinPlus.Lib.Configuration
 						mComment = value;
 						mHasComment = true;
 						OnCommentChanged(this, value);
-						mConfiguration.NotifyItemCommentChanged(this, mComment);
+						Configuration.NotifyItemCommentChanged(this, mComment);
 					}
 				}
 			}
@@ -241,33 +235,33 @@ namespace GriffinPlus.Lib.Configuration
 		/// </summary>
 		public void ResetValue()
 		{
-			lock (mConfiguration.Sync)
+			lock (Configuration.Sync)
 			{
 				if (mHasValue)
 				{
 					mHasValue = false;
 					mValue = default(T);
 
-					if (mConfiguration.InheritedConfiguration != null)
+					if (Configuration.InheritedConfiguration != null)
 					{
-						CascadedConfigurationItem<T> item = mConfiguration.InheritedConfiguration.GetItemThatHasValue<T>(mName, true);
+						CascadedConfigurationItem<T> item = Configuration.InheritedConfiguration.GetItemThatHasValue<T>(mName, true);
 						if (item != null)
 						{
 							OnValueChanged(this, item.Value);
-							mConfiguration.NotifyItemValueChanged<T>(item, item.Value);
+							Configuration.NotifyItemValueChanged<T>(item, item.Value);
 						}
 						else
 						{
 							throw new ConfigurationException(
 								"Configuration item does not inherit a value from some other configuration (configuration: {0}, item: {1}, type: {2}).",
-								mConfiguration.Name, mName, typeof(T).FullName);
+								Configuration.Name, mName, typeof(T).FullName);
 						}
 					}
 					else
 					{
 						throw new ConfigurationException(
 							"Configuration item does not inherit a value from from other configuration (configuration: {0}, item: {1}, type: {2}).",
-							mConfiguration.Name, mName, typeof(T).FullName);
+							Configuration.Name, mName, typeof(T).FullName);
 					}
 				}
 			}
@@ -278,31 +272,31 @@ namespace GriffinPlus.Lib.Configuration
 		/// </summary>
 		public void ResetComment()
 		{
-			lock (mConfiguration.Sync)
+			lock (Configuration.Sync)
 			{
 				if (mHasComment)
 				{
 					mHasComment = false;
 					mComment = null;
 
-					if (mConfiguration.InheritedConfiguration != null)
+					if (Configuration.InheritedConfiguration != null)
 					{
-						CascadedConfigurationItem<T> item = mConfiguration.InheritedConfiguration.GetItemThatHasComment<T>(mName, true);
+						CascadedConfigurationItem<T> item = Configuration.InheritedConfiguration.GetItemThatHasComment<T>(mName, true);
 						if (item != null)
 						{
 							OnCommentChanged(this, item.Comment);
-							mConfiguration.NotifyItemCommentChanged<T>(item, item.Comment);
+							Configuration.NotifyItemCommentChanged<T>(item, item.Comment);
 						}
 						else
 						{
 							OnCommentChanged(this, null);
-							mConfiguration.NotifyItemCommentChanged<T>(this, null);
+							Configuration.NotifyItemCommentChanged<T>(this, null);
 						}
 					}
 					else
 					{
 						OnCommentChanged(this, null);
-						mConfiguration.NotifyItemCommentChanged<T>(this, null);
+						Configuration.NotifyItemCommentChanged<T>(this, null);
 					}
 				}
 			}
@@ -323,7 +317,7 @@ namespace GriffinPlus.Lib.Configuration
 		/// <param name="configuration">Configuration to set.</param>
 		void ICascadedConfigurationItemInternal.SetConfiguration(CascadedConfiguration configuration)
 		{
-			mConfiguration = configuration;
+			Configuration = configuration;
 		}
 
 		/// <summary>

@@ -1,7 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // This file is part of the Griffin+ common library suite (https://griffin.plus)
 //
-// Copyright 2018 Sascha Falk <sascha@falk-online.eu>
+// Copyright 2018-2019 Sascha Falk <sascha@falk-online.eu>
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -48,9 +48,11 @@ namespace GriffinPlus.Lib.Configuration
 			bool checkValidity)
 		{
 			List<string> segments = new List<string>();
-			foreach (string segment in sPathSplitterRegex.Split(path)) {
+			foreach (string segment in sPathSplitterRegex.Split(path))
+			{
 				string s = segment.Trim();
-				if (s.Length > 0) {
+				if (s.Length > 0)
+				{
 					segments.Add(segment);
 				}
 			}
@@ -65,7 +67,8 @@ namespace GriffinPlus.Lib.Configuration
 						if (i + 1 < segments.Count)
 						{
 							// intermediate segment (can be a configuration only)
-							if (!strategy.IsValidConfigurationName(name)) {
+							if (!strategy.IsValidConfigurationName(name))
+							{
 								throw new ConfigurationException("The specified configuration name ({0}) is not supported by the persistence strategy.", name);
 							}
 						}
@@ -74,13 +77,15 @@ namespace GriffinPlus.Lib.Configuration
 							// last segment (can be a configuration or an item)
 							if (isItemPath)
 							{
-								if (!strategy.IsValidItemName(name)) {
+								if (!strategy.IsValidItemName(name))
+								{
 									throw new ConfigurationException("The specified configuration name ({0}) is not supported by the persistence strategy.", name);
 								}
 							}
 							else
 							{
-								if (!strategy.IsValidConfigurationName(name)) {
+								if (!strategy.IsValidConfigurationName(name))
+								{
 									throw new ConfigurationException("The specified configuration name ({0}) is not supported by the persistence strategy.", name);
 								}
 							}
@@ -89,7 +94,11 @@ namespace GriffinPlus.Lib.Configuration
 				}
 			}
 
-			if (segments.Count == 0) throw new ArgumentException("The path is invalid, since it does not contain any location information.");
+			if (segments.Count == 0)
+			{
+				throw new ArgumentException("The path is invalid, since it does not contain any location information.");
+			}
+
 			return segments.ToArray();
 		}
 
@@ -102,9 +111,13 @@ namespace GriffinPlus.Lib.Configuration
 			ICascadedConfigurationPersistenceStrategy strategy,
 			Type type)
 		{
-			if (strategy != null) {
-				if (!strategy.SupportsType(type)) {
-					throw new ConfigurationException("The specified type ({0}) is not supported by the persistence strategy.", type.FullName);
+			if (strategy != null)
+			{
+				if (!strategy.SupportsType(type))
+				{
+					throw new ConfigurationException(
+						"The specified type ({0}) is not supported by the persistence strategy.",
+						type.FullName);
 				}
 			}
 		}
@@ -121,9 +134,13 @@ namespace GriffinPlus.Lib.Configuration
 			Type itemType,
 			object value)
 		{
-			if (strategy != null) {
-				if (!strategy.IsAssignable(itemType, value)) {
-					throw new ConfigurationException("The specified value is not supported for a configuration item of type '{0}'.", itemType.FullName);
+			if (strategy != null)
+			{
+				if (!strategy.IsAssignable(itemType, value))
+				{
+					throw new ConfigurationException(
+						"The specified value is not supported for a configuration item of type '{0}'.",
+						itemType.FullName);
 				}
 			}
 		}

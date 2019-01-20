@@ -1,7 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // This file is part of the Griffin+ common library suite (https://griffin.plus)
 //
-// Copyright 2018 Sascha Falk <sascha@falk-online.eu>
+// Copyright 2018-2019 Sascha Falk <sascha@falk-online.eu>
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -117,8 +117,12 @@ namespace GriffinPlus.Lib.Configuration
 		/// <summary>
 		/// Updates the specified configuration loading settings from the registry.
 		/// </summary>
-		/// <exception cref="SecurityException">The user does not have the permissions required to read from the registry key.</exception>
-		/// <exception cref="ConfigurationException">Loading the configuration failed due to a serialization error.</exception>
+		/// <exception cref="SecurityException">
+		/// The user does not have the permissions required to read from the registry key.
+		/// </exception>
+		/// <exception cref="ConfigurationException">
+		/// Loading the configuration failed due to a serialization error.
+		/// </exception>
 		public override void Load(CascadedConfiguration configuration)
 		{
 			lock (configuration.Sync)

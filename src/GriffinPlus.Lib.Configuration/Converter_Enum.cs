@@ -1,7 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // This file is part of the Griffin+ common library suite (https://griffin.plus)
 //
-// Copyright 2018 Sascha Falk <sascha@falk-online.eu>
+// Copyright 2018-2019 Sascha Falk <sascha@falk-online.eu>
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -20,7 +20,6 @@ namespace GriffinPlus.Lib.Configuration
 	/// </summary>
 	public class Converter_Enum : IConverter
 	{
-		private readonly Type mType;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Converter_Enum"/> class.
@@ -28,16 +27,13 @@ namespace GriffinPlus.Lib.Configuration
 		/// <param name="type">The enumeration type to convert.</param>
 		public Converter_Enum(Type type)
 		{
-			mType = type;
+			Type = type;
 		}
 
 		/// <summary>
 		/// Gets the type of the value the current converter is working with.
 		/// </summary>
-		public Type Type
-		{
-			get { return mType; }
-		}
+		public Type Type { get; }
 
 		/// <summary>
 		/// Converts an object to its string representation.
@@ -51,8 +47,8 @@ namespace GriffinPlus.Lib.Configuration
 		public string ConvertObjectToString(object obj, IFormatProvider provider = null)
 		{
 			if (obj == null) throw new ArgumentNullException(nameof(obj));
-			if (obj.GetType() != mType) {
-				string error = string.Format("Expecting an object of type {0}, got {1}.", mType.FullName, obj.GetType().FullName, nameof(obj));
+			if (obj.GetType() != Type) {
+				string error = string.Format("Expecting an object of type {0}, got {1}.", Type.FullName, obj.GetType().FullName, nameof(obj));
 				throw new ArgumentException(error);
 			}
 
@@ -70,7 +66,7 @@ namespace GriffinPlus.Lib.Configuration
 		/// <returns>The created object.</returns>
 		public object ConvertStringToObject(string s, IFormatProvider provider = null)
 		{
-			return Enum.Parse(mType, s);
+			return Enum.Parse(Type, s);
 		}
 
 	}

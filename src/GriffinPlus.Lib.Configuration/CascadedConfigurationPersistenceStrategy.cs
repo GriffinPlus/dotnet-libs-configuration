@@ -1,7 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // This file is part of the Griffin+ common library suite (https://griffin.plus)
 //
-// Copyright 2018 Sascha Falk <sascha@falk-online.eu>
+// Copyright 2018-2019 Sascha Falk <sascha@falk-online.eu>
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -13,8 +13,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace GriffinPlus.Lib.Configuration
 {
@@ -31,7 +29,8 @@ namespace GriffinPlus.Lib.Configuration
 		protected readonly object mSync = new object();
 
 		/// <summary>
-		/// Registers a converter that tells the configuration how to convert an object in the configuration to its string representation and vice versa.
+		/// Registers a converter that tells the configuration how to convert an object in the configuration to its
+		/// string representation and vice versa.
 		/// </summary>
 		/// <param name="converter">Converter to register.</param>
 		public void RegisterValueConverter(IConverter converter)
@@ -64,21 +63,30 @@ namespace GriffinPlus.Lib.Configuration
 		/// Checks whether the specified name is a valid configuration name.
 		/// </summary>
 		/// <param name="name">Name to check.</param>
-		/// <returns>true, if the specified configuration name is valid for use with the strategy; otherwise false.</returns>
+		/// <returns>
+		/// true, if the specified configuration name is valid for use with the strategy;
+		/// otherwise false.
+		/// </returns>
 		public abstract bool IsValidConfigurationName(string name);
 
 		/// <summary>
 		/// Checks whether the specified name is a valid item name.
 		/// </summary>
 		/// <param name="name">Name to check.</param>
-		/// <returns>true, if the specified item name is valid for use with the strategy; otherwise false.</returns>
+		/// <returns>
+		/// true, if the specified item name is valid for use with the strategy;
+		/// otherwise false.
+		/// </returns>
 		public abstract bool IsValidItemName(string name);
 
 		/// <summary>
 		/// Checks whether the persistence strategy supports the specified type.
 		/// </summary>
 		/// <param name="type">Type to check.</param>
-		/// <returns>true, if the persistence strategy supports the specified type; otherwise false.</returns>
+		/// <returns>
+		/// true, if the persistence strategy supports the specified type;
+		/// otherwise false.
+		/// </returns>
 		public abstract bool SupportsType(Type type);
 
 		/// <summary>
@@ -93,11 +101,15 @@ namespace GriffinPlus.Lib.Configuration
 		/// </summary>
 		/// <param name="type">Type of the value of the configuration item to check.</param>
 		/// <param name="value">Value to check.</param>
-		/// <returns>true, if the specified value may be assigned to a configuration item of the specified type; otherwise false.</returns>
+		/// <returns>
+		/// true, if the specified value may be assigned to a configuration item of the specified type;
+		/// otherwise false.
+		/// </returns>
 		/// <remarks>
-		/// This method always returns <c>true</c>, if the type of the value matches the specified type. Otherwise <c>false</c> is returned.
-		/// This is useful, if the persistence strategy does not save any type information, so the type of the configuration item is the only
-		/// chance to determine the type to construct when loading a configuration item. 
+		/// This method always returns <c>true</c>, if the type of the value matches the specified type. Otherwise
+		/// <c>false</c> is returned. This is useful, if the persistence strategy does not save any type information,
+		/// so the type of the configuration item is the only chance to determine the type to construct when loading
+		/// a configuration item.
 		/// </remarks>
 		public virtual bool IsAssignable(Type type, object value)
 		{

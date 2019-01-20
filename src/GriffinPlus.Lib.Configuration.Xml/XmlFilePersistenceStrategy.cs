@@ -1,7 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // This file is part of the Griffin+ common library suite (https://griffin.plus)
 //
-// Copyright 2018 Sascha Falk <sascha@falk-online.eu>
+// Copyright 2018-2019 Sascha Falk <sascha@falk-online.eu>
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -42,7 +42,10 @@ namespace GriffinPlus.Lib.Configuration
 		/// Checks whether the specified name is a valid configuration name.
 		/// </summary>
 		/// <param name="name">Name to check.</param>
-		/// <returns>true, if the specified configuration name is valid for use with the strategy; otherwise false.</returns>
+		/// <returns>
+		/// true, if the specified configuration name is valid for use with the strategy;
+		/// otherwise false.
+		/// </returns>
 		public override bool IsValidConfigurationName(string name)
 		{
 			return true;
@@ -92,7 +95,9 @@ namespace GriffinPlus.Lib.Configuration
 		/// <summary>
 		/// Updates the specified configuration loading settings from the configuration file.
 		/// </summary>
-		/// <exception cref="InvalidOperationException">The configuration is a child configuration (try to load the root configuration instead).</exception>
+		/// <exception cref="InvalidOperationException">
+		/// The configuration is a child configuration (try to load the root configuration instead).
+		/// </exception>
 		/// <exception cref="ConfigurationException">Loading the configuration file failed.</exception>
 		public override void Load(CascadedConfiguration configuration)
 		{
@@ -127,7 +132,8 @@ namespace GriffinPlus.Lib.Configuration
 
 
 		/// <summary>
-		/// Reads the specified XML element (a 'Configuration' element) and updates the corresponding items in the specified configuration.
+		/// Reads the specified XML element (a 'Configuration' element) and updates the corresponding items in the specified
+		/// configuration.
 		/// </summary>
 		/// <param name="configuration">Configuration to update.</param>
 		/// <param name="parent">Parent element in the XML tree.</param>
@@ -299,7 +305,9 @@ namespace GriffinPlus.Lib.Configuration
 		/// </summary>
 		/// <param name="configuration">Configuration to save.</param>
 		/// <param name="flags">Flags controlling the saving behavior.</param>
-		/// <exception cref="ConfigurationException">The configuration is a child configuration (try to load the root configuration instead).</exception>
+		/// <exception cref="ConfigurationException">
+		/// The configuration is a child configuration (try to load the root configuration instead).
+		/// </exception>
 		public override void Save(CascadedConfiguration configuration, CascadedConfigurationSaveFlags flags)
 		{
 			if (mConfigurationFilePath == null) {
@@ -408,7 +416,8 @@ namespace GriffinPlus.Lib.Configuration
 
 
 		/// <summary>
-		/// Adds/sets an XML element ('Item') with the specified name in the 'name' attribute and the specified value as inner text of the 'Item' element.
+		/// Adds/sets an XML element ('Item') with the specified name in the 'name' attribute and the specified value
+		/// as inner text of the 'Item' element.
 		/// </summary>
 		/// <param name="parent">The parent XML element of the 'Item' element to add/set.</param>
 		/// <param name="configuration">Configuration the configuration item is in.</param>
