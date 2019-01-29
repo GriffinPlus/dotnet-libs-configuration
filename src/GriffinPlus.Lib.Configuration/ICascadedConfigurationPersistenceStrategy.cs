@@ -35,6 +35,23 @@ namespace GriffinPlus.Lib.Configuration
 		bool IsValidItemName(string name);
 
 		/// <summary>
+		/// Registers a converter that tells the configuration how to convert an object in the configuration to its
+		/// string representation and vice versa.
+		/// </summary>
+		/// <param name="converter">Converter to register.</param>
+		void RegisterValueConverter(IConverter converter);
+
+		/// <summary>
+		/// Gets a converter for the specified type.
+		/// </summary>
+		/// <param name="type">Type to get a converter for.</param>
+		/// <returns>
+		/// The requested converter;
+		/// null, if there is no converter registered for the specified type.
+		/// </returns>
+		IConverter GetValueConverter(Type type);
+
+		/// <summary>
 		/// Checks whether the persistence strategy supports the specified type.
 		/// </summary>
 		/// <param name="type">Type to check.</param>
